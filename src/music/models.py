@@ -21,20 +21,36 @@ class Album(models.Model):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='albums', db_column='ArtistId')
 
     class QuerySet(models.QuerySet):
+        @property
+        def _aggregate_ordering_fix(self):
+            """
+            Annotations with Aggregations are not mark as ordered so may eventually raise warnings like
+            UnorderedObjectListWarning.
+
+            This function set an explicit order_by based on the Model.META.ordering value. If you don't like then call
+            `order_by()` with your own arguments or with an empty for remove the effect
+
+            https://docs.djangoproject.com/en/3.1/topics/db/aggregation/#interaction-with-default-ordering-or-order-by
+            """
+            ordering_key = 'id'
+            assert ordering_key in self.model._meta.ordering, 'Sync Model.META.ordering with the value in this function'
+
+            return self.order_by(ordering_key)
+
         def with_artist_name(self):
             return self.annotate(artist_name=F('artist__name'))
 
         def with_track_count(self):
-            return self.annotate(track_count=Count('tracks'))
+            return self._aggregate_ordering_fix.annotate(track_count=Count('tracks'))
 
         def with_track_longest(self):
-            return self.annotate(track_longest=Max('tracks__milliseconds'))
+            return self._aggregate_ordering_fix.annotate(track_longest=Max('tracks__milliseconds'))
 
         def with_track_shortest(self):
-            return self.annotate(track_shortest=Min('tracks__milliseconds'))
+            return self._aggregate_ordering_fix.annotate(track_shortest=Min('tracks__milliseconds'))
 
         def with_milliseconds(self):
-            return self.annotate(milliseconds=Sum('tracks__milliseconds'))
+            return self._aggregate_ordering_fix.annotate(milliseconds=Sum('tracks__milliseconds'))
 
     objects = QuerySet.as_manager()
 
