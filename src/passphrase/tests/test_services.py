@@ -8,6 +8,7 @@ from passphrase import services
 class BasicValidation(TestCase):
     @parameterized.expand((
         # passphrase, Valid
+        ('', False),
         ('aa bb cc dd ee', True),
         ('aa bb cc dd aa', False),
         ('aa bb cc dd aaa', True),
@@ -19,6 +20,7 @@ class BasicValidation(TestCase):
 class AdvancedValidation(TestCase):
     @parameterized.expand((
         # passphrase, Valid
+        ('', False),
         ('abcde fghij', True),
         ('abcde xyz ecdab', False),
         ('a ab abc abd abf abj', True),

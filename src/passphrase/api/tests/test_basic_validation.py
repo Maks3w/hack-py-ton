@@ -8,6 +8,8 @@ class BasicValidationViewTest(APITestCase):
     @parameterized.expand((
         # Passphrases, valid_count
         ([
+        ], 0),
+        ([
             'aa bb cc dd ee',  # Valid
             'aa bb cc dd aa',  # Invalid
             'aa bb cc dd aaa',  # Valid

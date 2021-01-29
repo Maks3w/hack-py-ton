@@ -3,6 +3,8 @@ def basic_validation(passphrase: str) -> bool:
     A passphrase consists of a series of words (lowercase letters) separated by spaces.
     To ensure security, a valid passphrase must contain no duplicate words.
     """
+    if passphrase.strip() == '':
+        return False
     words = passphrase.split(' ')
     return len(words) == len(set(words))
 
@@ -13,6 +15,8 @@ def advanced_validation(passphrase: str) -> bool:
     a passphrase is invalid if any word's letters can be rearranged to form any other word in
     the passphrase.
     """
+    if passphrase.strip() == '':
+        return False
     words = passphrase.split(' ')
     # Normalize each word before unique check
     return len(words) == len(set(map(lambda w: ''.join(sorted(w)), words)))
