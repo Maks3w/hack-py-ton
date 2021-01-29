@@ -1,0 +1,54 @@
+version: 2.1
+
+commands:
+  python_setup:
+    steps:
+      - restore_cache:
+          keys:
+            - pipenv-{{ arch }}-{{ checksum "Pipfile.lock" }}
+            - pipenv-{{ arch }}-
+      - run:
+          name: Install Test Dependencies
+          command: |
+            pip install pipenv==2020.11.15
+            pipenv install --system --deploy --dev
+      - save_cache:
+          key: pipenv-{{ arch }}-{{ checksum "Pipfile.lock" }}
+          paths:
+            - ~/.cache/pip
+            - ~/.cache/pipenv
+
+jobs:
+  test:
+    working_directory: ~/app/src
+    docker:
+      - image: python:3.9.1
+        environment:
+          DJANGO_SETTINGS_MODULE: core.settings
+          PIPENV_VERBOSE: True
+          SECRET_KEY: SECRET_KEY
+    steps:
+      - checkout:
+          path: ~/app
+      - python_setup
+      - run:
+          name: Run Tests
+          command: pytest --cov --junitxml=test-reports/django/test_result.xml
+      - store_test_results:
+          path: test-reports
+      - store_artifacts:
+          path: test-reports
+      - store_artifacts:
+          path: .pytest_cache
+      - run:
+          when: always
+          name: Upload coverage report
+          command: |
+            pip install codecov
+            codecov
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test

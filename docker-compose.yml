@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile
+      args:
+        PIPENV_ARGS: "--dev"
+    env_file:
+      - .env.sample
+    restart: on-failure
+    command: /usr/local/bin/runserver.sh
+    ports:
+        - 8000:8000
+    volumes:
+      - "./src/:/project/src/"

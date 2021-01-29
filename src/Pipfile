@@ -1,0 +1,33 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+Django = "*"
+django-environ = "*"
+django-extensions = "*"
+django-model-utils = "*"
+ipython = "*"
+jedi = "<0.18.0"
+requests = "*"
+sentry-sdk = "*"
+tldextract = "*"
+url-normalize = "*"
+django-taggit = "*"
+djangorestframework = "*"
+
+[dev-packages]
+django-capture-on-commit-callbacks = "*"
+factory-boy = "*"
+freezegun = "*"
+parameterized = "*"
+pytest = "*"
+pytest-cov = "*"
+pytest-django = "*"
+pytest-randomness = "*"
+pytest-xdist = "*"
+responses = "*"
+
+[requires]
+python_version = "3.9"
