@@ -16,3 +16,12 @@ class BasicValidationView(GenericAPIView):
         valid = filter(lambda r: r, results)
 
         return create_response(len(list(valid)))
+
+
+class AdvancedValidationView(GenericAPIView):
+    def post(self, request, *args, **kwargs):
+        passphrases = request.data['passphrases'].split('\n')
+        results = map(services.advanced_validation, passphrases)
+        valid = filter(lambda r: r, results)
+
+        return create_response(len(list(valid)))
