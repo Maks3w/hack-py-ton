@@ -17,7 +17,7 @@ class Artist(models.Model):
 class Album(models.Model):
     id = models.AutoField(db_column='AlbumId', primary_key=True)
     title = models.TextField(db_column='Title')
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, db_column='ArtistId')
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='albums', db_column='ArtistId')
 
     def __str__(self):
         return f'{self.id} - {self.title}'
