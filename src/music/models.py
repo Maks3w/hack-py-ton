@@ -31,7 +31,7 @@ class Album(models.Model):
 class Track(models.Model):
     id = models.AutoField(db_column='TrackId', primary_key=True)
     name = models.TextField(db_column='Name')
-    album = models.ForeignKey(Album, on_delete=models.CASCADE, db_column='AlbumId')
+    album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name='tracks', db_column='AlbumId')
     milliseconds = models.IntegerField(db_column='Milliseconds')
 
     def __str__(self):
