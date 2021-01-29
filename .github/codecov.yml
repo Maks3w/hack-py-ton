@@ -1,3 +1,5 @@
+codecov:
+  branch: development
 comment: false
 fixes:
   - "::src/"
