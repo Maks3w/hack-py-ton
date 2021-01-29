@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import Min, Max, Sum
+from django.db.models import Min, Max, Sum, F, Count
 
 
 class Artist(models.Model):
@@ -21,6 +21,12 @@ class Album(models.Model):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='albums', db_column='ArtistId')
 
     class QuerySet(models.QuerySet):
+        def with_artist_name(self):
+            return self.annotate(artist_name=F('artist__name'))
+
+        def with_track_count(self):
+            return self.annotate(track_count=Count('tracks'))
+
         def with_track_longest(self):
             return self.annotate(track_longest=Max('tracks__milliseconds'))
 
