@@ -17,10 +17,14 @@ class TrackSerializer(serializers.ModelSerializer):
 
 class AlbumSerializer(serializers.ModelSerializer):
     tracks = TrackSerializer(many=True)
+    artist_name = serializers.CharField()
+    track_count = serializers.IntegerField()
     track_longest = serializers.IntegerField()
     track_shortest = serializers.IntegerField()
     milliseconds = serializers.IntegerField()
 
     class Meta:
         model = models.Album
-        fields = ('id', 'title', 'tracks', 'track_longest', 'track_shortest', 'milliseconds')
+        fields = (
+            'id', 'title', 'tracks', 'artist_name', 'track_count', 'track_longest', 'track_shortest', 'milliseconds',
+        )

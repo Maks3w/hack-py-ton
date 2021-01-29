@@ -18,6 +18,8 @@ class AlbumViewSet(ListModelMixin, GenericViewSet):
 
     def get_queryset(self):
         queryset = models.Album.objects \
+            .with_artist_name() \
+            .with_track_count() \
             .with_track_longest() \
             .with_track_shortest() \
             .with_milliseconds()
