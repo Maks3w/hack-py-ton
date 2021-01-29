@@ -1,3 +1,5 @@
+import sys
+
 import environ
 import os
 
@@ -63,6 +65,40 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join('/project', 'db', 'chinook.db'),
+    }
+}
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'stream': sys.stdout,
+        }
+    },
+    'loggers': {
+        '': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+        },
+        'asyncio': {
+            # Mute dev autoreload polling system
+            'level': 'INFO',
+        },
+        'faker': {
+            # Mute faker test data provisioner
+            'level': 'INFO',
+        },
+        'factory': {
+            # Mute factory_boy test data provisioner
+            'level': 'INFO',
+        },
+        'parso': {
+            # Mute iPython autocomplete
+            'level': 'INFO',
+        },
     }
 }
 

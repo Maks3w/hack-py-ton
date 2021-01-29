@@ -43,3 +43,11 @@ docker system prune
 ```bash
 docker-compose exec app python manage.py shell
 ```
+
+## Admin panel
+
+http://host.docker.internal:8000/admin
+
+User: `root`
+
+Password: `root`
