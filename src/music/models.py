@@ -11,6 +11,7 @@ class Artist(models.Model):
     class Meta:
         managed = True
         db_table = 'artists'
+        ordering = ['id']
 
 
 class Album(models.Model):
@@ -24,6 +25,7 @@ class Album(models.Model):
     class Meta:
         managed = True
         db_table = 'albums'
+        ordering = ['id']
 
 
 class Track(models.Model):
@@ -38,3 +40,4 @@ class Track(models.Model):
     class Meta:
         managed = True
         db_table = 'tracks'
+        ordering = ['id']
