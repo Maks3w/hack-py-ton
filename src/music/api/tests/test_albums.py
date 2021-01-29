@@ -1,5 +1,4 @@
 import base64
-from random import randint
 
 from django.urls import reverse
 from rest_framework import status
@@ -45,25 +44,3 @@ class AlbumViewTest(APITestCase):
     def assert_serialization_match(self, artist: models.Album, result: dict):
         self.assertEqual(artist.id, result['id'], result)
         self.assertEqual(artist.title, result['title'], result)
-
-
-class ArtistViewTest(APITestCase):
-    def test_empty_list(self):
-        r_retrieve = self.client.get(reverse('music_api:artist-list'), format='json')
-        self.assertEqual(status.HTTP_200_OK, r_retrieve.status_code, r_retrieve.content)
-
-        self.assertEqual(0, r_retrieve.data['count'], r_retrieve.content)
-
-    def test_list(self):
-        artists = factories.ArtistFactory.create_batch(randint(1, 20))
-
-        r_retrieve = self.client.get(reverse('music_api:artist-list'), format='json')
-        self.assertEqual(status.HTTP_200_OK, r_retrieve.status_code, r_retrieve.content)
-
-        self.assertEqual(len(artists), r_retrieve.data['count'], r_retrieve.content)
-
-        self.assert_serialization_match(artists[0], r_retrieve.data['results'][0])
-
-    def assert_serialization_match(self, artist: models.Artist, result: dict):
-        self.assertEqual(artist.id, result['id'], result)
-        self.assertEqual(artist.name, result['name'], result)
