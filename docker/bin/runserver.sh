@@ -1,3 +1,4 @@
 #!/usr/bin/env sh
 
-exec python manage.py runserver 0.0.0.0:"${SERVER_PORT}"
+python manage.py migrate \
+  && exec python manage.py runserver 0.0.0.0:"${SERVER_PORT}"
