@@ -17,7 +17,10 @@ class AlbumViewSet(ListModelMixin, GenericViewSet):
     serializer_class = serializers.AlbumSerializer
 
     def get_queryset(self):
-        queryset = models.Album.objects.all()
+        queryset = models.Album.objects \
+            .with_track_longest() \
+            .with_track_shortest() \
+            .with_milliseconds()
         artist_id = self.request.query_params.get('artist_id', None)
         if artist_id is not None:
             queryset = queryset.filter(artist_id=artist_id)
