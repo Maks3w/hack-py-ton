@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django_extensions',
 
     'music',
+    'passphrase',
 ]
 
 MIDDLEWARE = [
