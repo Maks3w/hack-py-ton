@@ -1,4 +1,5 @@
 import base64
+import random
 
 from django.urls import reverse
 from rest_framework import status
@@ -40,6 +41,22 @@ class AlbumViewTest(APITestCase):
         self.assertEqual(len(albums), r_retrieve.data['count'], r_retrieve.content)
 
         self.assert_serialization_match(albums[0], r_retrieve.data['results'][0])
+
+    def test_list_filter_by_artist(self):
+        albums = factories.AlbumFactory.create_batch(2)
+        target_album = random.choice(albums)
+
+        r_retrieve = self.client.get(
+            reverse('music_api:album-list'),
+            {'artist_id': target_album.artist_id},
+            format='json',
+            **authentication(),
+        )
+        self.assertEqual(status.HTTP_200_OK, r_retrieve.status_code, r_retrieve.content)
+
+        self.assertEqual(1, r_retrieve.data['count'], r_retrieve.content)
+
+        self.assert_serialization_match(target_album, r_retrieve.data['results'][0])
 
     def assert_serialization_match(self, artist: models.Album, result: dict):
         self.assertEqual(artist.id, result['id'], result)

@@ -15,3 +15,10 @@ class AlbumViewSet(ListModelMixin, GenericViewSet):
     permission_classes = [IsAuthenticated]
     queryset = models.Album.objects.all()
     serializer_class = serializers.AlbumSerializer
+
+    def get_queryset(self):
+        queryset = models.Album.objects.all()
+        artist_id = self.request.query_params.get('artist_id', None)
+        if artist_id is not None:
+            queryset = queryset.filter(artist_id=artist_id)
+        return queryset
