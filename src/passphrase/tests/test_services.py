@@ -14,3 +14,16 @@ class BasicValidation(TestCase):
     ))
     def test_basic_validation(self, passphrase: str, valid: bool):
         self.assertEqual(valid, services.basic_validation(passphrase), passphrase)
+
+
+class AdvancedValidation(TestCase):
+    @parameterized.expand((
+        # passphrase, Valid
+        ('abcde fghij', True),
+        ('abcde xyz ecdab', False),
+        ('a ab abc abd abf abj', True),
+        ('iiii oiii ooii oooi oooo', True),
+        ('oiii ioii iioi iiio', False),
+    ))
+    def test_advanced_validation(self, passphrase: str, valid: bool):
+        self.assertEqual(valid, services.advanced_validation(passphrase), passphrase)

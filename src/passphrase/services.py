@@ -5,3 +5,7 @@ def basic_validation(passphrase: str) -> bool:
     """
     words = passphrase.split(' ')
     return len(words) == len(set(words))
+
+
+def advanced_validation(passphrase: str) -> bool:
+    raise NotImplemented
