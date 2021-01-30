@@ -15,6 +15,12 @@ ALLOWED_HOSTS = [
     'host.docker.internal',
 ]
 
+INTERNAL_IPS = [
+    '127.0.0.1',
+    '172.19.0.1',
+    '192.168.99.1',
+]
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -23,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'debug_toolbar',
     'django_extensions',
     'rest_framework',
 
@@ -31,6 +38,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

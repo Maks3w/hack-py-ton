@@ -28,6 +28,7 @@ pytest-django = "*"
 pytest-randomness = "*"
 pytest-xdist = "*"
 responses = "*"
+django-debug-toolbar = "*"
 
 [requires]
 python_version = "3.9"
