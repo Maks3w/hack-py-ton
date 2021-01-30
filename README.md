@@ -24,7 +24,9 @@
 
 2. Visit the web interface
 
-    http://host.docker.internal:8000
+    * http://host.docker.internal:8000/admin/
+    * http://host.docker.internal:8000/music/
+    * http://host.docker.internal:8000/passphrases/
 
 ## Cleanup everything
 
