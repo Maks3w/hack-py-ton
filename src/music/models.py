@@ -32,10 +32,7 @@ class Album(models.Model):
 
             https://docs.djangoproject.com/en/3.1/topics/db/aggregation/#interaction-with-default-ordering-or-order-by
             """
-            ordering_key = 'id'
-            assert ordering_key in self.model._meta.ordering, 'Sync Model.META.ordering with the value in this function'
-
-            return self.order_by(ordering_key)
+            return self.order_by(*self.model._meta.ordering)
 
         def with_artist_name(self):
             return self.annotate(artist_name=F('artist__name'))
