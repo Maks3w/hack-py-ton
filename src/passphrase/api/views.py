@@ -1,27 +1,43 @@
+from abc import ABCMeta, abstractmethod
+
 from rest_framework import status
-from rest_framework.generics import GenericAPIView
+from rest_framework.mixins import CreateModelMixin
 from rest_framework.response import Response
+from rest_framework.viewsets import GenericViewSet
 
 from passphrase import services
+from passphrase.api import serializers
 
 
 def create_response(valid: int) -> Response:
     return Response({'valid': valid}, status=status.HTTP_200_OK)
 
 
-class BasicValidationView(GenericAPIView):
-    def post(self, request, *args, **kwargs):
-        passphrases = request.data['passphrases'].split('\n')
-        results = map(services.basic_validation, passphrases)
+class AbstractValidationViewSet(CreateModelMixin, GenericViewSet, metaclass=ABCMeta):
+    @abstractmethod
+    def get_validation_service(self) -> callable:
+        raise NotImplementedError
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        passphrases = serializer.save()['passphrases']
+        results = map(self.get_validation_service(), passphrases)
         valid = filter(lambda r: r, results)
 
-        return create_response(len(list(valid)))
+        return Response({'valid': len(list(valid))}, status=status.HTTP_200_OK)
 
 
-class AdvancedValidationView(GenericAPIView):
-    def post(self, request, *args, **kwargs):
-        passphrases = request.data['passphrases'].split('\n')
-        results = map(services.advanced_validation, passphrases)
-        valid = filter(lambda r: r, results)
+class BasicValidationViewSet(AbstractValidationViewSet):
+    serializer_class = serializers.PassphraseSerializer
 
-        return create_response(len(list(valid)))
+    def get_validation_service(self) -> callable:
+        return services.basic_validation
+
+
+class AdvancedValidationViewSet(AbstractValidationViewSet):
+    serializer_class = serializers.PassphraseSerializer
+
+    def get_validation_service(self) -> callable:
+        return services.advanced_validation
