@@ -9,10 +9,6 @@ from passphrase import services
 from passphrase.api import serializers
 
 
-def create_response(valid: int) -> Response:
-    return Response({'valid': valid}, status=status.HTTP_200_OK)
-
-
 class AbstractValidationViewSet(CreateModelMixin, GenericViewSet, metaclass=ABCMeta):
     @abstractmethod
     def get_validation_service(self) -> callable:
