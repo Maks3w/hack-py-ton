@@ -3,21 +3,24 @@ from parameterized import parameterized
 from rest_framework import status
 from rest_framework.test import APITestCase
 
+from passphrase.api.tests.mixins import AbstractValidationViewSetTestCase
 
-class BasicValidationViewTest(APITestCase):
+
+class BasicValidationViewTest(AbstractValidationViewSetTestCase, APITestCase):
+    def get_path(self) -> str:
+        return reverse('passphrase_api:basic_validation-list')
+
     @parameterized.expand((
         # Passphrases, valid_count
-        ([
-        ], 0),
         ([
             'aa bb cc dd ee',  # Valid
             'aa bb cc dd aa',  # Invalid
             'aa bb cc dd aaa',  # Valid
         ], 2),
     ))
-    def test_empty_list(self, passphrases: list, valid_count: int):
+    def test_validation(self, passphrases: list, valid_count: int):
         r_retrieve = self.client.post(
-            reverse('passphrase_api:basic_validation'),
+            self.get_path(),
             {'passphrases': '\n'.join(passphrases)},
         )
         self.assertEqual(status.HTTP_200_OK, r_retrieve.status_code, r_retrieve.content)
