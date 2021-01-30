@@ -9,6 +9,7 @@ class BasicValidation(TestCase):
     @parameterized.expand((
         # passphrase, Valid
         ('', False),
+        (' ', False),
         ('aa bb cc dd ee', True),
         ('aa bb cc dd aa', False),
         ('aa bb cc dd aaa', True),
@@ -21,6 +22,7 @@ class AdvancedValidation(TestCase):
     @parameterized.expand((
         # passphrase, Valid
         ('', False),
+        (' ', False),
         ('abcde fghij', True),
         ('abcde xyz ecdab', False),
         ('a ab abc abd abf abj', True),
