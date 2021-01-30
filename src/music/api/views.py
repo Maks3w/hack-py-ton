@@ -18,6 +18,7 @@ class AlbumViewSet(ListModelMixin, GenericViewSet):
 
     def get_queryset(self):
         queryset = models.Album.objects \
+            .prefetch_related('tracks') \
             .with_artist_name() \
             .with_track_count() \
             .with_track_longest() \
