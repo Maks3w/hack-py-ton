@@ -16,7 +16,7 @@ class ArtistSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'image')
 
     @staticmethod
-    def optimize_queryset(qs: QuerySet) -> QuerySet:
+    def build_queryset(qs: QuerySet) -> QuerySet:
         return qs \
             .prefetch_related(*ArtistSerializer.prefetch_optimizations()) \
             .select_related(*ArtistSerializer.select_optimizations())
@@ -63,7 +63,7 @@ class AlbumSerializer(serializers.ModelSerializer):
         )
 
     @staticmethod
-    def optimize_queryset(qs: QuerySet) -> QuerySet:
+    def build_queryset(qs: QuerySet) -> QuerySet:
         return qs \
             .prefetch_related('tracks', *AlbumSerializer.prefetch_optimizations()) \
             .select_related('artist', *AlbumSerializer.select_optimizations()) \
