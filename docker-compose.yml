@@ -1,18 +1,35 @@
 version: "3.7"
 
+x-app-common:
+  &app-common
+  build:
+    context: ./
+    dockerfile: docker/Dockerfile
+    args:
+      PIPENV_ARGS: "--dev"
+  env_file:
+    - .env.sample
+  volumes:
+    - "./db/:/project/db/"
+    - "./src/:/project/src/"
+
 services:
   app:
-    build:
-      context: ./
-      dockerfile: docker/Dockerfile
-      args:
-        PIPENV_ARGS: "--dev"
-    env_file:
-      - .env.sample
+    <<: *app-common
     restart: on-failure
     command: /usr/local/bin/runserver.sh
     ports:
         - 8000:8000
-    volumes:
-      - "./db/:/project/db/"
-      - "./src/:/project/src/"
+
+  celery:
+    <<: *app-common
+    restart: on-failure
+    command: celery --app=core worker
+
+  rabbitmq:
+    image: rabbitmq:3.8.4-management-alpine
+    restart: on-failure
+    env_file:
+      - .env.sample
+    ports:
+      - 15672:15672

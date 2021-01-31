@@ -18,6 +18,7 @@ django-taggit = "*"
 djangorestframework = "*"
 lxml = "*"
 python-magic = "*"
+celery = "*"
 
 [dev-packages]
 django-capture-on-commit-callbacks = "*"

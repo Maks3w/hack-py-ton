@@ -82,6 +82,8 @@ DATABASES = {
     }
 }
 
+BROKER_URL = env('BROKER_URL')
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
