@@ -19,11 +19,11 @@ class ExtractImagesFromResponseTest(TestCase):
             [
                 {
                     'name': 'DJs@Work',
-                    'photo': None,
+                    'image': None,
                 },
                 {
                     'name': 'The Icicle Works',
-                    'photo': 'https://rovimusic.rovicorp.com/image.jpg?c=hi3tC3A057LovoZr0ygyMz6KsMttLlyBmmVTZ6_CLs0=&f=2',
+                    'image': 'https://rovimusic.rovicorp.com/image.jpg?c=hi3tC3A057LovoZr0ygyMz6KsMttLlyBmmVTZ6_CLs0=&f=2',
                 },
             ],
             result,

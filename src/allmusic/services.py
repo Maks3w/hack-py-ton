@@ -14,7 +14,7 @@ def extract_images_from_response(response: str) -> list[dict[str, str]]:
         results.append(
             {
                 'name': name,
-                'photo': photo if photo != '' else None,
+                'image': photo if photo != '' else None,
             },
         )
     return results

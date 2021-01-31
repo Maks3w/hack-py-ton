@@ -9,7 +9,7 @@ class ImportArtistImagesTest(TestCase):
         artist_images = [
             {
                 'name': 'NotExists',
-                'photo': 'NotExistsPhoto',
+                'image': 'NotExistsPhoto',
             },
         ]
 
@@ -25,7 +25,7 @@ class ImportArtistImagesTest(TestCase):
         artist_images = [
             {
                 'name': 'another artists without image',
-                'photo': None,
+                'image': None,
             },
         ]
 
@@ -46,19 +46,19 @@ class ImportArtistImagesTest(TestCase):
         artist_images = [
             {
                 'name': 'NotExists',
-                'photo': 'NotExistsPhoto',
+                'image': 'NotExistsPhoto',
             },
             {
                 'name': 'another artists without image',
-                'photo': None,
+                'image': None,
             },
             {
                 'name': 'artist without image',
-                'photo': 'NewImageSet',
+                'image': 'NewImageSet',
             },
             {
                 'name': 'artist with image',
-                'photo': 'error_image_replaced',
+                'image': 'error_image_replaced',
             },
         ]
 

@@ -3,7 +3,7 @@ from music import models
 
 class ImportArtistImages(object):
     def from_crawler_result(self, artist_images: list[dict[str, str]]):
-        artist_images = list(filter(lambda ai: ai['photo'] is not None, artist_images))
+        artist_images = list(filter(lambda ai: ai['image'] is not None, artist_images))
         if not artist_images:
             return
 
@@ -20,7 +20,7 @@ class ImportArtistImages(object):
         images = []
         for entry in artist_images:
             artist = artists[entry['name']]
-            image = self.process_image(artist, entry['photo'])
+            image = self.process_image(artist, entry['image'])
             images.append(image)
         artists = artists.values()
 
