@@ -19,6 +19,7 @@ COPY src/Pipfile src/Pipfile.lock $HOMEDIR
 RUN buildDeps="" \
   && apt-get update && apt-get install --assume-yes --no-install-recommends \
     $buildDeps \
+    libmagic1 \
   && pipenv install --system --deploy $PIPENV_ARGS \
   && rm -rf ~/.cache/ \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false $buildDeps \

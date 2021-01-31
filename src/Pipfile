@@ -17,6 +17,7 @@ url-normalize = "*"
 django-taggit = "*"
 djangorestframework = "*"
 lxml = "*"
+python-magic = "*"
 
 [dev-packages]
 django-capture-on-commit-callbacks = "*"
