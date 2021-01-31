@@ -5,7 +5,7 @@ from music import models
 
 
 class ArtistImageFactory(factory.django.DjangoModelFactory):
-    filename = FuzzyText(length=128)
+    filename = factory.Faker('uri')
 
     class Meta:
         model = models.ArtistImage

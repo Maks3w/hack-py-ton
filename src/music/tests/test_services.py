@@ -1,3 +1,6 @@
+from unittest import mock
+
+import celery
 from django.test import TestCase
 
 from music import services, models
@@ -64,7 +67,9 @@ class ImportArtistImagesTest(TestCase):
 
         import_tool = services.ImportArtistImages()
 
-        import_tool.from_crawler_result(artist_images)
+        with mock.patch.object(celery.group, 'apply_async') as mock_group:
+            import_tool.from_crawler_result(artist_images)
+        self.assertEqual(mock_group.call_count, 1)
 
         artist_qs = models.Artist.objects
         artist_image_qs = models.ArtistImage.objects
