@@ -1,4 +1,4 @@
-from lxml import html
+from lxml import html, etree
 
 from allmusic.crawler import Crawler
 
@@ -8,12 +8,13 @@ def extract_images_from_response(response: str) -> list[dict[str, str]]:
     results = []
     artists = root.xpath(f'.//li[@class="artist"]')
     for artist in artists:
-        name = next(iter(artist.xpath(f'.//div[@class="name"]//a/text()')), None)
-        photo = next(iter(artist.xpath(f'.//div[@class="photo"]//img/@src')), None)
+        artist = etree.XPathEvaluator(artist)
+        name = artist('string(.//div[@class="name"]//a/text())')
+        photo = artist('string(.//div[@class="photo"]//img/@src)')
         results.append(
             {
                 'name': name,
-                'photo': photo,
+                'photo': photo if photo != '' else None,
             },
         )
     return results
