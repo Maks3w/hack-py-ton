@@ -16,6 +16,7 @@ tldextract = "*"
 url-normalize = "*"
 django-taggit = "*"
 djangorestframework = "*"
+lxml = "*"
 
 [dev-packages]
 django-capture-on-commit-callbacks = "*"
