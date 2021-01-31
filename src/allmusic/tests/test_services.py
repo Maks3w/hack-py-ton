@@ -1,7 +1,9 @@
 import os
-from unittest import TestCase
+from unittest import TestCase, mock
 
-from allmusic import services
+from factory.fuzzy import FuzzyText
+
+from allmusic import services, crawler
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -26,3 +28,19 @@ class ExtractImagesFromResponseTest(TestCase):
             ],
             result,
         )
+
+
+class AllmusicScrapperTest(TestCase):
+    def test_look_for_artist(self):
+        allmusic = services.AllmusicScrapper()
+        artist_name = FuzzyText().fuzz()
+        response = FuzzyText().fuzz()
+        expected_result = [FuzzyText().fuzz()]
+
+        with mock.patch.object(crawler.Crawler, 'request', return_value=response) as mock_request, \
+                mock.patch.object(services, 'extract_images_from_response', return_value=expected_result) as mock_parse:
+            result = allmusic.look_for_artist(artist_name)
+            mock_request.assert_called_once_with(f'https://www.allmusic.com/search/artists/{artist_name}')
+            mock_parse.assert_called_once_with(response)
+
+        self.assertEqual(expected_result, result)
