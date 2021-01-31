@@ -6,6 +6,9 @@ class ArtistImage(models.Model):
     id = models.AutoField(db_column='ArtistImageId', primary_key=True)
     filename = models.CharField(max_length=128)
 
+    def __str__(self):
+        return self.filename
+
 
 class Artist(models.Model):
     id = models.AutoField(db_column='ArtistId', primary_key=True)
