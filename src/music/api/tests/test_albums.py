@@ -58,6 +58,9 @@ class AlbumViewTest(APITestCase):
 
         self.assert_serialization_match(target_album, r_retrieve.data['results'][0])
 
-    def assert_serialization_match(self, artist: models.Album, result: dict):
-        self.assertEqual(artist.id, result['id'], result)
-        self.assertEqual(artist.title, result['title'], result)
+    def assert_serialization_match(self, album: models.Album, result: dict):
+        self.assertEqual(album.id, result['id'], result)
+        self.assertEqual(album.title, result['title'], result)
+        self.assertIn('artist', result, result)
+        self.assertEqual(album.artist.name, result['artist']['name'], result['artist'])
+        self.assertEqual(album.artist.image.filename, result['artist']['image'], result['artist'])

@@ -7,7 +7,7 @@ from music.api import serializers
 
 
 class ArtistViewSet(ListModelMixin, GenericViewSet):
-    queryset = models.Artist.objects.all()
+    queryset = models.Artist.objects.select_related('image').all()
     serializer_class = serializers.ArtistSerializer
 
 
@@ -19,7 +19,8 @@ class AlbumViewSet(ListModelMixin, GenericViewSet):
     def get_queryset(self):
         queryset = models.Album.objects \
             .prefetch_related('tracks') \
-            .with_artist_name() \
+            .select_related('artist') \
+            .select_related('artist__image') \
             .with_track_count() \
             .with_track_longest() \
             .with_track_shortest() \

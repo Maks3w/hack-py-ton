@@ -4,9 +4,11 @@ from music import models
 
 
 class ArtistSerializer(serializers.ModelSerializer):
+    image = serializers.CharField(source='image.filename', default=None)
+
     class Meta:
         model = models.Artist
-        fields = ('id', 'name')
+        fields = ('id', 'name', 'image')
 
 
 class TrackSerializer(serializers.ModelSerializer):
@@ -17,7 +19,7 @@ class TrackSerializer(serializers.ModelSerializer):
 
 class AlbumSerializer(serializers.ModelSerializer):
     tracks = TrackSerializer(many=True)
-    artist_name = serializers.CharField()
+    artist = ArtistSerializer()
     track_count = serializers.IntegerField()
     track_longest = serializers.IntegerField()
     track_shortest = serializers.IntegerField()
@@ -26,5 +28,5 @@ class AlbumSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Album
         fields = (
-            'id', 'title', 'tracks', 'artist_name', 'track_count', 'track_longest', 'track_shortest', 'milliseconds',
+            'id', 'title', 'tracks', 'artist', 'track_count', 'track_longest', 'track_shortest', 'milliseconds',
         )

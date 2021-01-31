@@ -28,3 +28,4 @@ class ArtistViewTest(APITestCase):
     def assert_serialization_match(self, artist: models.Artist, result: dict):
         self.assertEqual(artist.id, result['id'], result)
         self.assertEqual(artist.name, result['name'], result)
+        self.assertEqual(artist.image.filename, result['image'], result)
