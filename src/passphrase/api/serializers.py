@@ -6,5 +6,5 @@ class PassphraseSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         return {
-            'passphrases': validated_data['passphrases'].split('\n'),
+            'passphrases': map(lambda p: p.strip(), validated_data['passphrases'].split('\n')),
         }
