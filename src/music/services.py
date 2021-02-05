@@ -11,7 +11,7 @@ class ImportArtistImages(object):
 
         # Get Artist objects from DB
         names = list(map(lambda r: r['name'], artist_images))
-        artists = {a.name: a for a in models.Artist.objects.filter(name__in=names, image__isnull=True)}
+        artists = {a.name: a for a in models.Artist.objects.filter(name__in=names, image__isnull=True).all()}
         #  Discard results not exists
         names = artists.keys()
         artist_images = list(filter(lambda e: e['name'] in names, artist_images))
