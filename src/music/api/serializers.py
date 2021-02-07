@@ -5,7 +5,7 @@ from music import models
 
 
 def add_relation_prefix(prefix: str, relations: list[str]) -> list[str]:
-    return list(map(lambda r: f'{prefix}__{r}', relations))
+    return [f'{prefix}__{r}' for r in relations]
 
 
 class ArtistSerializer(serializers.ModelSerializer):

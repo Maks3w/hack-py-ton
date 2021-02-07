@@ -10,7 +10,7 @@ class ImportArtistImages(object):
             return
 
         # Get Artist objects from DB
-        names = list(map(lambda r: r['name'], artist_images))
+        names = [ai['name'] for ai in artist_images]
         artists = {a.name: a for a in models.Artist.objects.filter(name__in=names, image__isnull=True).all()}
         #  Discard results not exists
         names = artists.keys()

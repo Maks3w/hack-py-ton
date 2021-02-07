@@ -19,4 +19,4 @@ def advanced_validation(passphrase: str) -> bool:
         return False
     words = passphrase.split(' ')
     # Normalize each word before unique check
-    return len(words) == len(set(map(lambda w: ''.join(sorted(w)), words)))
+    return len(words) == len({ ''.join(sorted(w)) for w in words})
