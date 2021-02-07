@@ -20,7 +20,7 @@ class AbstractValidationViewSet(CreateModelMixin, GenericViewSet, metaclass=ABCM
 
         passphrases = serializer.save()['passphrases']
         results = map(self.get_validation_service(), passphrases)
-        valid = filter(lambda r: r, results)
+        valid = [r for r in results if r is True]
 
         return Response({'valid': len(list(valid))}, status=status.HTTP_200_OK)
 

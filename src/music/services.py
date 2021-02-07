@@ -5,7 +5,7 @@ from music import models, tasks
 
 class ImportArtistImages(object):
     def from_crawler_result(self, artist_images: list[dict[str, str]]):
-        artist_images = list(filter(lambda ai: ai['image'] is not None, artist_images))
+        artist_images = [ai for ai in artist_images if ai['image'] is not None]
         if not artist_images:
             return
 
@@ -14,7 +14,7 @@ class ImportArtistImages(object):
         artists = {a.name: a for a in models.Artist.objects.filter(name__in=names, image__isnull=True).all()}
         #  Discard results not exists
         names = artists.keys()
-        artist_images = list(filter(lambda e: e['name'] in names, artist_images))
+        artist_images = [ai for ai in artist_images if ai['name'] in names]
         if not artist_images:
             return
 
