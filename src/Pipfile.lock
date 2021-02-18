@@ -279,11 +279,11 @@
         },
         "python-magic": {
             "hashes": [
-                "sha256:2fe26b15ed59118ac117caba4e64d10966298d3dca15a4802fdfc3da4c25184a",
-                "sha256:ea911853708f3085e905a5db0941fb256d620534970c5f8e733d81f37c360ddc"
+                "sha256:8551e804c09a3398790bd9e392acb26554ae2609f29c72abb0b9dee9a5571eae",
+                "sha256:ca884349f2c92ce830e3f498c5b7c7051fe2942c3ee4332f65213b8ebff15a62"
             ],
             "index": "pypi",
-            "version": "==0.4.21"
+            "version": "==0.4.22"
         },
         "pytz": {
             "hashes": [
@@ -508,7 +508,6 @@
                 "sha256:3971803f32728314c54ba051139cd433fc93fde371e18d07a2cec960a7a2222a",
                 "sha256:b27f9bc97490a11f14c1501cc25f1109cf68c75f11c6ef97714757a4298c33e5"
             ],
-            "index": "pypi",
             "version": "==6.3.0"
         },
         "freezegun": {
