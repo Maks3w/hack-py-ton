@@ -258,10 +258,11 @@
         },
         "prompt-toolkit": {
             "hashes": [
-                "sha256:0fa02fa80363844a4ab4b8d6891f62dd0645ba672723130423ca4037b80c1974",
-                "sha256:62c811e46bd09130fb11ab759012a4ae385ce4fb2073442d1898867a824183bd"
+                "sha256:4cea7d09e46723885cb8bc54678175453e5071e9449821dce6f017b1d1fbfc1a",
+                "sha256:9397a7162cf45449147ad6042fa37983a081b8a73363a5253dd4072666333137"
             ],
-            "version": "==3.0.16"
+            "index": "pypi",
+            "version": "==3.0.17"
         },
         "ptyprocess": {
             "hashes": [
@@ -511,7 +512,6 @@
                 "sha256:0a68a539b236a614157581a135c82a27024a66dc96b9a491883fe583ae3689f9",
                 "sha256:38bd2ff0afb7d9956fed477a2cd1007a7012b401a9ffd3de5fb909d739880582"
             ],
-            "index": "pypi",
             "version": "==6.6.0"
         },
         "freezegun": {
