@@ -527,11 +527,11 @@
         },
         "faker": {
             "hashes": [
-                "sha256:53ac8eded46d890c0fcc6f5b43f8f569ad0f9da3b2e5d779cab63d5c0851f00b",
-                "sha256:61fcc4634cb1352437acc15667df1a4564f1b6312fe9dbcf1aed958b5de0531a"
+                "sha256:5b1c0781c0c2f6b177adf4018feec265bbcd0118b301dbec64a1908c29124ed6",
+                "sha256:c94240c40073400b269c50b14da765fd4d3b4dda8ae25c2753afc809c72f1062"
             ],
             "index": "pypi",
-            "version": "==8.3.0"
+            "version": "==8.4.0"
         },
         "freezegun": {
             "hashes": [
