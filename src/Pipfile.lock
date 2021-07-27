@@ -520,11 +520,11 @@
         },
         "faker": {
             "hashes": [
-                "sha256:2f62a30e79e7802655ee7f0cc88a49c39622a5d11f609992bf6ffbbbbf65db25",
-                "sha256:5e4bc11b01c2d8ddea63fa6fbd9916e9166038de0a407daba3220cf6f0157320"
+                "sha256:771b21ab55924867ac865f4b0c2f547c200172293b1056be16289584ef1215cb",
+                "sha256:f27a2a5c34042752f9d5fea2a9667aed5265d7d7bdd5ce83bc03b2f8a540d148"
             ],
             "index": "pypi",
-            "version": "==8.10.2"
+            "version": "==8.10.3"
         },
         "freezegun": {
             "hashes": [
