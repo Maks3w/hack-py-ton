@@ -1,4 +1,4 @@
-FROM python:3.9.1-slim as production
+FROM python:3.10.1-slim as production
 
 RUN pip install --no-cache-dir pipenv==2020.11.15
 
