@@ -520,11 +520,11 @@
         },
         "django-capture-on-commit-callbacks": {
             "hashes": [
-                "sha256:1cec8fb62a9bcc1acdf82d56fb4b6c9780d03243b7e76fb49ffc7cfc1bbba24b",
-                "sha256:694bbbc68d4128537dbcc8302596edd88e6ed10aa5805721cc622764dac64d4e"
+                "sha256:01554678a99980c383f3791bd4e81af3a2f2fcaef08ac8aaccce9e9f13756bb0",
+                "sha256:f71f0816928884d43a4b15ff966a37c04004ef621f3d1e74768c06ae98262221"
             ],
             "index": "pypi",
-            "version": "==1.5.0"
+            "version": "==1.9.0"
         },
         "django-debug-toolbar": {
             "hashes": [
