@@ -30,8 +30,8 @@ jobs:
         working-directory: src
         run: |
           pytest --cov --junitxml=test-reports/django/test_result.xml
-      - uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: src/test-reports/django/test_result.xml
-          fail_ci_if_error: true
+      #- uses: codecov/codecov-action@v5
+      #  with:
+      #    token: ${{ secrets.CODECOV_TOKEN }}
+      #    files: src/test-reports/django/test_result.xml
+      #    fail_ci_if_error: true
