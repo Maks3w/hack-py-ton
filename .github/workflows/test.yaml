@@ -1,0 +1,37 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - name: Install dependencies
+        working-directory: src
+        run: |
+          pip install pipenv==2020.11.15
+          pipenv install --system --deploy --dev
+      - name: Run Tests
+        env:
+          BROKER_URL: amqp://guest:guest@localhost:5672/
+          DJANGO_SETTINGS_MODULE: core.settings
+          PIPENV_VERBOSE: True
+          SECRET_KEY: SECRET_KEY
+        working-directory: src
+        run: |
+          pytest --cov --junitxml=test-reports/django/test_result.xml
+      - uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: src/test-reports/django/test_result.xml
+          fail_ci_if_error: true
