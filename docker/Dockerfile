@@ -1,30 +1,17 @@
 FROM python:3.9.1-slim as production
 
-RUN pip install --no-cache-dir pipenv==2020.11.15
+# e.g., using a hash from a previous release
+COPY --from=ghcr.io/astral-sh/uv@sha256:2381d6aa60c326b71fd40023f921a0a3b8f91b14d5db6b90402e65a635053709 /uv /uvx /bin/
 
-ENV HOMEDIR=/project/src/ \
-  TERM=vt100 \
-  C_FORCE_ROOT=1 \
-  PYTHONUNBUFFERED=1 \
-  PIPENV_VERBOSE=True \
-  SERVER_PORT=8000
+EXPOSE 8000
 
-EXPOSE $SERVER_PORT
+WORKDIR /project/src/
 
-WORKDIR $HOMEDIR
-
-ARG PIPENV_ARGS
-
-COPY src/Pipfile src/Pipfile.lock $HOMEDIR
-RUN buildDeps="" \
-  && apt-get update && apt-get install --assume-yes --no-install-recommends \
-    $buildDeps \
-    libmagic1 \
-  && pipenv install --system --deploy $PIPENV_ARGS \
-  && rm -rf ~/.cache/ \
-  && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false $buildDeps \
-  && apt-get clean
+COPY src/uv.lock src/pyproject.toml ./
+RUN uv sync --frozen --no-install-project
 
 COPY docker/bin/* /usr/local/bin/
+ADD src/ ./
+RUN uv sync --frozen
 
 USER www-data
